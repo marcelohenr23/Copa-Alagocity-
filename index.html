@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copa Alagocity FF | Torneio de CS</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="top-bar"></div>
+
+    <header>
+        <div class="logo">COPA <span>ALAGOCITY</span></div>
+        <nav>
+            <a href="#" onclick="switchTab('home')">Início</a>
+            <a href="#" onclick="switchTab('regras')">Regulamento</a>
+            <a href="#" onclick="switchTab('inscricao')">Inscrição</a>
+        </nav>
+    </header>
+
+    <!-- ABA: HOME -->
+    <section id="home" class="tab-content active">
+        <div class="hero-container">
+            <div class="badge">CONTRA SQUAD (4v4)</div>
+            <h1>COPA ALAGOCITY FF</h1>
+            <p>A maior disputa de Contra Squad da região. Prepare sua call, ajuste a sensibilidade e domine a arena de emuladores e móbiles!</p>
+            <div class="premio-card">
+                <p>PREMIAÇÃO DO CAMPEÃO</p>
+                <h2>R$ 200,00</h2>
+            </div>
+            <button class="btn-primary" onclick="switchTab('inscricao')">INSCREVER MEU SQUAD</button>
+        </div>
+    </section>
+
+    <!-- ABA: REGRAS -->
+    <section id="regras" class="tab-content">
+        <div class="content-card">
+            <h2>REGULAMENTO & CRONOGRAMA</h2>
+            
+            <div class="rule-item">
+                <h3>📅 Dias de Disputa</h3>
+                <p><strong>Segunda-feira:</strong> Fase de Classificação (Pontos por Vitória).</p>
+                <p><strong>Quarta-feira:</strong> Playoffs (Mata-Mata / Semifinais).</p>
+                <p><strong>Sexta-feira:</strong> A Grande Final (A disputa do título!).</p>
+            </div>
+
+            <div class="rule-item">
+                <h3>⚔️ Formato Contra Squad</h3>
+                <p>Modo CS (4v4). A classificação inicial define quem avança para os dias eliminatórios.</p>
+            </div>
+
+            <div class="rule-item">
+                <h3>⚙️ Configuração da Sala</h3>
+                <p>Moeda Inicial: 1500 | Munição Limitada: NÃO | Habilidade: SIM.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABA: INSCRIÇÃO -->
+    <section id="inscricao" class="tab-content">
+        <div class="content-card">
+            <h2>INSCRIÇÃO DE TIME</h2>
+            <p class="subtitle">Insira o nome da guilda e o nick de cada jogador do quarteto.</p>
+            
+            <form id="form-campeonato">
+                <div class="input-group">
+                    <label>Nome do Squad / Guilda</label>
+                    <input type="text" placeholder="Ex: Alagocity Esports" required>
+                </div>
+                <div class="input-group">
+                    <label>WhatsApp do Líder (para o grupo do camp)</label>
+                    <input type="tel" placeholder="(75) 99999-9999" required>
+                </div>
+                
+                <div class="squad-grid">
+                    <div class="input-group"><label>Nick Jogador 1 (Capitão)</label><input type="text" required></div>
+                    <div class="input-group"><label>Nick Jogador 2</label><input type="text" required></div>
+                    <div class="input-group"><label>Nick Jogador 3</label><input type="text" required></div>
+                    <div class="input-group"><label>Nick Jogador 4</label><input type="text" required></div>
+                </div>
+
+                <button type="submit" class="btn-submit">CONFIRMAR INSCRIÇÃO</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+</body>
+  </html>
+  
