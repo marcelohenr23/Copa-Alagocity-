@@ -7,426 +7,118 @@
 }
 
 body {
-    background-color: #0d0d0d;
-    color: #f5f5f7;
-    background-image: radial-gradient(circle at center, #1c170c 0%, #0d0d0d 100%);
+    background-color: #050505;
+    color: #ffffff;
     min-height: 100vh;
     overflow-x: hidden;
 }
 
-.top-bar {
-    height: 4px;
-    background: linear-gradient(90deg, #d4af37, #f3e5ab);
-    box-shadow: 0 0 15px #d4af37;
-}
-
-/* ================= CABEÇALHO E NAVEGAÇÃO ================= */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 40px;
-    background: rgba(13, 13, 13, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #222;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    letter-spacing: 2px;
-}
-
-.logo span {
-    color: #d4af37;
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-}
-
-nav a {
-    color: #a0a0a5;
-    text-decoration: none;
-    margin-left: 25px;
-    font-weight: 600;
-    font-size: 14px;
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: #fff;
-    text-shadow: 0 0 8px #fff;
-}
-
-/* ================= GERENCIAMENTO DE ABAS ================= */
-.tab-content {
-    display: none;
-    animation: fadeIn 0.5s ease;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-/* ================= TELA DE LOGIN ISOLADA ================= */
+/* ================= TELA DE LOGIN (DESIGN PREMIUM) ================= */
 #login-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    background: #0d0d0d;
-    background-image: radial-gradient(circle at center, #1c170c 0%, #0d0d0d 100%);
-    z-index: 5000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-#login-screen.hidden {
-    display: none !important;
-}
-
-.login-card {
-    background: #141414;
-    border: 1px solid #d4af37;
-    padding: 45px 30px;
-    border-radius: 16px;
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-}
-
-.login-card h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: #fff;
-    margin-top: 15px;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-    line-height: 1.1;
-}
-
-.login-subtitle {
-    color: #a0a0a5;
-    font-size: 13px;
-    margin-bottom: 30px;
-    line-height: 1.5;
-}
-
-.security-notice {
-    display: block;
-    font-size: 11px;
-    color: #555;
-    margin-top: 25px;
-    font-weight: 600;
-}
-
-.security-notice i {
-    color: #d4af37;
-    margin-right: 4px;
-}
-
-/* ================= BOTÕES DE LOGIN SOCIAL (GOOGLE & GITHUB) ================= */
-.social-login-container {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.btn-social {
-    width: 100%;
-    padding: 16px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    transition: 0.2s;
-    color: #fff;
-}
-
-/* Estilo do Botão Google */
-.btn-google { 
-    background-color: #df4a32; 
-}
-.btn-google:hover { 
-    background-color: #f0543c; 
-    box-shadow: 0 0 20px rgba(223, 74, 50, 0.4); 
-}
-
-/* Estilo do Botão GitHub */
-.btn-github { 
-    background-color: #24292e; 
-    border: 1px solid #444; 
-}
-.btn-github:hover { 
-    background-color: #2f363d; 
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15); 
-}
-
-.btn-social:active { 
-    transform: scale(0.97); 
-}
-
-/* ================= DESIGN DO SITE PRINCIPAL (HOME) ================= */
-.hero-container {
-    max-width: 800px;
-    margin: 80px auto;
-    text-align: center;
-    padding: 20px;
-}
-
-.badge {
-    display: inline-block;
-    padding: 6px 16px;
-    background: rgba(212, 175, 55, 0.1);
-    border: 1px solid #d4af37;
-    color: #d4af37;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-}
-
-.hero-container h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 4.5rem;
-    line-height: 0.95;
-    margin-bottom: 20px;
-    background: linear-gradient(#fff, #d4af37);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.hero-container p {
-    color: #a0a0a5;
-    font-size: 16px;
-    margin-bottom: 40px;
-    line-height: 1.6;
-}
-
-.premio-card {
-    background: linear-gradient(135deg, #241e11 0%, #111 100%);
-    border: 1px solid #4a3b1a;
-    padding: 30px;
-    border-radius: 12px;
-    display: inline-block;
-    margin-bottom: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-}
-
-.premio-card p {
-    margin-bottom: 5px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    color: #d4af37;
-}
-
-.premio-card h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3.5rem;
-    color: #fff;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-}
-
-.btn-primary {
-    background: linear-gradient(90deg, #d4af37, #b8860b);
-    color: #000;
-    border: none;
-    padding: 18px 40px;
-    font-size: 16px;
-    font-weight: 800;
-    border-radius: 6px;
-    cursor: pointer;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-    transition: 0.3s;
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
-}
-
-/* ================= CARTÕES DE CONTEÚDO (REGRAS E INSCRIÇÃO) ================= */
-.content-card {
-    max-width: 650px;
-    margin: 60px auto;
-    background: #141414;
-    border: 1px solid #222;
-    padding: 40px;
-    border-radius: 12px;
-}
-
-.content-card h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 10px;
-}
-
-.subtitle {
-    color: #a0a0a5;
-    margin-bottom: 30px;
-    font-size: 14px;
-}
-
-.rule-item {
-    margin-bottom: 25px;
-    border-left: 3px solid #d4af37;
-    padding-left: 15px;
-}
-
-.rule-item h3 { font-size: 18px; margin-bottom: 5px; }
-.rule-item p { color: #a0a0a5; font-size: 14px; }
-
-/* ================= FORMULÁRIOS DE INSCRIÇÃO ================= */
-.input-group {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.input-group label {
-    font-size: 13px;
-    color: #a0a0a5;
-    margin-bottom: 8px;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.input-group input {
-    background: #1f1f1f;
-    border: 1px solid #333;
-    padding: 14px;
-    color: #fff;
-    border-radius: 6px;
-    font-size: 15px;
-    transition: 0.3s;
-}
-
-.input-group input:focus {
-    outline: none;
-    border-color: #d4af37;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-}
-
-.squad-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.btn-submit {
-    width: 100%;
-    background: #d4af37;
-    color: #000;
-    border: none;
-    padding: 16px;
-    font-weight: 800;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: 0.3s;
-}
-
-.btn-submit:hover {
-    background: #fff;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-}
-
-/* ================= ANIMAÇÕES DE TRANSIÇÃO E LOADING ================= */
-#loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #0d0d0d;
+    height: 100%;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
     z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-.fade-out { opacity: 0 !important; visibility: hidden !important; }
-.fade-in { animation: fadeInEffect 0.5s ease forwards; }
-
-@keyframes fadeInEffect {
-    from { opacity: 0; transform: scale(0.98); }
-    to { opacity: 1; transform: scale(1); }
+.login-card {
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
-.loader-content { text-align: center; }
-
-.loader-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3.5rem;
-    letter-spacing: 3px;
-    color: #fff;
-    margin-bottom: 15px;
-    animation: pulseGlow 1.5s infinite ease-in-out;
-}
-
-.loader-logo span { color: #d4af37; }
-
-.loader-bar {
-    width: 250px;
-    height: 6px;
-    background: #1f1f1f;
-    border-radius: 10px;
-    margin: 0 auto 15px auto;
-    overflow: hidden;
-    border: 1px solid #333;
-}
-
-.loader-progress {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #b8860b, #d4af37);
-    box-shadow: 0 0 10px #d4af37;
-    border-radius: 10px;
-    animation: fillBar 2.8s forwards ease-in-out;
-}
-
-.loader-content p {
-    font-size: 11px;
+.badge {
+    background: rgba(212, 175, 55, 0.15);
+    color: #d4af37;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 800;
     letter-spacing: 2px;
-    color: #a0a0a5;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.login-card h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+/* ================= BOTÕES (MELHORADOS) ================= */
+.social-login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-social {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.9rem;
     font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    color: #fff !important;
+    text-decoration: none !important;
 }
 
-@keyframes pulseGlow {
-    0%, 100% { transform: scale(1); opacity: 0.9; text-shadow: 0 0 5px rgba(212,175,55,0.2); }
-    50% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 20px rgba(212,175,55,0.6); }
+/* Google - Otimizado */
+.btn-google {
+    background: #db4437 !important;
+}
+.btn-google:hover {
+    background: #c1392d !important;
+    transform: translateY(-2px);
 }
 
-@keyframes fillBar {
-    0% { width: 0%; }
-    100% { width: 100%; }
+/* GitHub - Agora com contraste perfeito */
+.btn-github {
+    background: #111 !important;
+    border: 1px solid #333 !important;
+}
+.btn-github:hover {
+    background: #000 !important;
+    border-color: #555 !important;
+    transform: translateY(-2px);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.security-notice {
+    font-size: 0.7rem;
+    color: #444;
+    margin-top: 25px;
+    display: block;
 }
 
-/* ================= RESPONSSIVIDADE (TELAS MENORES) ================= */
-@media (max-width: 600px) {
-    .squad-grid { grid-template-columns: 1fr; }
-    .hero-container h1 { font-size: 2.8rem; }
-    header { padding: 20px; }
-        }
-    
+/* ================= ANIMAÇÕES E DEMAIS ================= */
+.hidden { display: none !important; }
+
+/* Para evitar que o site principal apareça antes da hora */
+#main-content {
+    display: none;
+    }
