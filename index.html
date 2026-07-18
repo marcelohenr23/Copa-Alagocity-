@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <!-- TELA DE LOADING ANIMADA -->
+    <!-- TELA 1: LOADING ANIMADA (Aparece primeiro por 3 segundos) -->
     <div id="loading-screen">
         <div class="loader-content">
             <h1 class="loader-logo">COPA <span>ALAGOCITY</span></h1>
@@ -20,12 +20,12 @@
         </div>
     </div>
 
-    <!-- TELA DE LOGIN (APARECE DEPOIS DO LOADING) -->
+    <!-- TELA 2: LOGIN ISOLADO (Só aparece após o loading, esconde todo o resto) -->
     <div id="login-screen" class="hidden">
         <div class="login-card">
             <div class="badge">ÁREA DO ATLETA</div>
             <h2>CONECTE SUA CONTA</h2>
-            <p class="login-subtitle">Para acessar o campeonato e inscrever seu squad, faça login abaixo:</p>
+            <p class="login-subtitle">Para acessar o campeonato e ver as premiações, faça login abaixo:</p>
             
             <div class="social-login-container">
                 <button type="button" class="btn-social btn-google" onclick="handleSocialLogin('Google')">
@@ -39,8 +39,8 @@
         </div>
     </div>
 
-    <!-- CONTEÚDO PRINCIPAL DO SITE (SÓ FICA VISÍVEL APÓS LOGIN) -->
-    <div id="main-content" class="blur-content">
+    <!-- TELA 3: CONTEÚDO PRINCIPAL (Totalmente escondido até que o login seja feito) -->
+    <div id="main-content" style="display: none;">
         <div class="top-bar"></div>
 
         <header>
@@ -127,7 +127,7 @@
             document.getElementById(tabId).classList.add('active');
         }
 
-        // Lógica de transição: Loading -> Login
+        // Fluxo 1: Esconde o Loading e Mostra APENAS a tela de login
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
@@ -135,7 +135,6 @@
                 
                 setTimeout(() => {
                     loader.style.display = 'none';
-                    // Mostra a tela de login com efeito suave
                     const loginScreen = document.getElementById('login-screen');
                     loginScreen.classList.remove('hidden');
                     loginScreen.classList.add('fade-in');
@@ -143,7 +142,7 @@
             }, 3000);
         });
 
-        // Lógica de transição: Clique no Login -> Libera o Site
+        // Fluxo 2: Esconde o Login e LIBERA o site principal (Disseca premiações etc)
         function handleSocialLogin(plataforma) {
             alert('Conta do ' + plataforma + ' conectada com sucesso!');
             
@@ -152,8 +151,10 @@
             
             setTimeout(() => {
                 loginScreen.style.display = 'none';
-                // Remove o desfoque do site principal
-                document.getElementById('main-content').classList.remove('blur-content');
+                // Faz o site de fato aparecer
+                const mainContent = document.getElementById('main-content');
+                mainContent.style.display = 'block';
+                mainContent.classList.add('fade-in');
             }, 500);
         }
     </script>
