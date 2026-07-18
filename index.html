@@ -6,7 +6,7 @@
     <title>Copa Alagocity FF | Torneio de CS</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome para os ícones do Google e Facebook -->
+    <!-- Font Awesome para os ícones do Google e GitHub -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -31,8 +31,8 @@
                 <button type="button" class="btn-social btn-google" id="btn-google">
                     <i class="fab fa-google"></i> Entrar com o Google
                 </button>
-                <button type="button" class="btn-social btn-facebook" id="btn-facebook">
-                    <i class="fab fa-facebook-f"></i> Entrar com o Facebook
+                <button type="button" class="btn-social btn-github" id="btn-github">
+                    <i class="fab fa-github"></i> Entrar com o GitHub
                 </button>
             </div>
             <span class="security-notice"><i class="fas fa-shield-alt"></i> Conexão segura via Firebase Authentication.</span>
@@ -112,7 +112,7 @@
     <!-- SCRIPTS DO FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         // Suas chaves do Firebase
         const firebaseConfig = {
@@ -128,7 +128,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const googleProvider = new GoogleAuthProvider();
-        const facebookProvider = new FacebookAuthProvider();
+        const githubProvider = new GithubAuthProvider();
 
         const loginScreen = document.getElementById('login-screen');
         const mainContent = document.getElementById('main-content');
@@ -154,15 +154,15 @@
                 });
         });
 
-        document.getElementById('btn-facebook').addEventListener('click', () => {
-            signInWithPopup(auth, facebookProvider)
+        document.getElementById('btn-github').addEventListener('click', () => {
+            signInWithPopup(auth, githubProvider)
                 .then((result) => {
-                    alert('Bem-vindo, ' + result.user.displayName + '!');
+                    alert('Bem-vindo, ' + (result.user.displayName || result.user.reloadUserInfo.screenName) + '!');
                     liberarSite();
                 })
                 .catch((error) => {
-                    console.error("Erro Facebook: ", error);
-                    alert('Erro no login com Facebook.');
+                    console.error("Erro GitHub: ", error);
+                    alert('Falha na conexão com o GitHub. Certifique-se de ativar o provedor no painel do Firebase.');
                 });
         });
     </script>
@@ -190,4 +190,5 @@
         });
     </script>
 </body>
-</html>
+    </html>
+    
