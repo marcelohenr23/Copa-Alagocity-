@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <!-- TELA 1: LOADING ANIMADA (Aparece primeiro por 3 segundos) -->
+    <!-- TELA 1: LOADING ANIMADA -->
     <div id="loading-screen">
         <div class="loader-content">
             <h1 class="loader-logo">COPA <span>ALAGOCITY</span></h1>
@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <!-- TELA 2: LOGIN ISOLADO (Só aparece após o loading, esconde todo o resto) -->
+    <!-- TELA 2: LOGIN REAL COM FIREBASE -->
     <div id="login-screen" class="hidden">
         <div class="login-card">
             <div class="badge">ÁREA DO ATLETA</div>
@@ -28,18 +28,18 @@
             <p class="login-subtitle">Para acessar o campeonato e ver as premiações, faça login abaixo:</p>
             
             <div class="social-login-container">
-                <button type="button" class="btn-social btn-google" onclick="handleSocialLogin('Google')">
+                <button type="button" class="btn-social btn-google" id="btn-google">
                     <i class="fab fa-google"></i> Entrar com o Google
                 </button>
-                <button type="button" class="btn-social btn-facebook" onclick="handleSocialLogin('Facebook')">
+                <button type="button" class="btn-social btn-facebook" id="btn-facebook">
                     <i class="fab fa-facebook-f"></i> Entrar com o Facebook
                 </button>
             </div>
-            <span class="security-notice"><i class="fas fa-shield-alt"></i> Conexão segura via autenticação oficial.</span>
+            <span class="security-notice"><i class="fas fa-shield-alt"></i> Conexão segura via Firebase Authentication.</span>
         </div>
     </div>
 
-    <!-- TELA 3: CONTEÚDO PRINCIPAL (Totalmente escondido até que o login seja feito) -->
+    <!-- TELA 3: CONTEÚDO PRINCIPAL (SÓ LIBERA DEPOIS DO LOGIN) -->
     <div id="main-content" style="display: none;">
         <div class="top-bar"></div>
 
@@ -70,22 +70,15 @@
         <section id="regras" class="tab-content">
             <div class="content-card">
                 <h2>REGULAMENTO & CRONOGRAMA</h2>
-                
                 <div class="rule-item">
                     <h3>📅 Dias de Disputa</h3>
-                    <p><strong>Segunda-feira:</strong> Fase de Classificação (Pontos por Vitória).</p>
-                    <p><strong>Quarta-feira:</strong> Playoffs (Mata-Mata / Semifinais).</p>
-                    <p><strong>Sexta-feira:</strong> A Grande Final (A disputa do título!).</p>
+                    <p><strong>Segunda-feira:</strong> Fase de Classificação.</p>
+                    <p><strong>Quarta-feira:</strong> Playoffs (Mata-Mata).</p>
+                    <p><strong>Sexta-feira:</strong> A Grande Final!</p>
                 </div>
-
                 <div class="rule-item">
                     <h3>⚔️ Formato Contra Squad</h3>
-                    <p>Modo CS (4v4). A classificação inicial define quem avança para os dias eliminatórios.</p>
-                </div>
-
-                <div class="rule-item">
-                    <h3>⚙️ Configuração da Sala</h3>
-                    <p>Moeda Inicial: 1500 | Munição Limitada: NÃO | Habilidade: SIM.</p>
+                    <p>Modo CS (4v4). A classificação inicial define as chaves eliminatórias.</p>
                 </div>
             </div>
         </section>
@@ -95,30 +88,86 @@
             <div class="content-card">
                 <h2>INSCRIÇÃO DE TIME</h2>
                 <p class="subtitle">Insira o nome da guilda e o nick de cada jogador do quarteto.</p>
-                
                 <form id="form-campeonato">
                     <div class="input-group">
                         <label>Nome do Squad / Guilda</label>
                         <input type="text" placeholder="Ex: Alagocity Esports" required>
                     </div>
                     <div class="input-group">
-                        <label>WhatsApp do Líder (para o grupo do camp)</label>
+                        <label>WhatsApp do Líder</label>
                         <input type="tel" placeholder="(75) 99999-9999" required>
                     </div>
-                    
                     <div class="squad-grid">
                         <div class="input-group"><label>Nick Jogador 1 (Capitão)</label><input type="text" required></div>
                         <div class="input-group"><label>Nick Jogador 2</label><input type="text" required></div>
                         <div class="input-group"><label>Nick Jogador 3</label><input type="text" required></div>
                         <div class="input-group"><label>Nick Jogador 4</label><input type="text" required></div>
                     </div>
-
                     <button type="submit" class="btn-submit">CONFIRMAR INSCRIÇÃO</button>
                 </form>
             </div>
         </section>
     </div>
 
+    <!-- SCRIPTS DO FIREBASE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Suas chaves do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBUA80C353KNNeReO1XWnZo5sEUgzfV24Q",
+            authDomain: "copa-alagocity.firebaseapp.com",
+            projectId: "copa-alagocity",
+            storageBucket: "copa-alagocity.firebasestorage.app",
+            messagingSenderId: "734641755436",
+            appId: "1:734641755436:web:7f4b079504b71da767c889",
+            measurementId: "G-DH84Z1RGKT"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const googleProvider = new GoogleAuthProvider();
+        const facebookProvider = new FacebookAuthProvider();
+
+        const loginScreen = document.getElementById('login-screen');
+        const mainContent = document.getElementById('main-content');
+
+        function liberarSite() {
+            loginScreen.classList.add('fade-out');
+            setTimeout(() => {
+                loginScreen.style.display = 'none';
+                mainContent.style.display = 'block';
+                mainContent.classList.add('fade-in');
+            }, 500);
+        }
+
+        document.getElementById('btn-google').addEventListener('click', () => {
+            signInWithPopup(auth, googleProvider)
+                .then((result) => {
+                    alert('Bem-vindo, ' + result.user.displayName + '!');
+                    liberarSite();
+                })
+                .catch((error) => {
+                    console.error("Erro Google: ", error);
+                    alert('Falha na conexão com o Google.');
+                });
+        });
+
+        document.getElementById('btn-facebook').addEventListener('click', () => {
+            signInWithPopup(auth, facebookProvider)
+                .then((result) => {
+                    alert('Bem-vindo, ' + result.user.displayName + '!');
+                    liberarSite();
+                })
+                .catch((error) => {
+                    console.error("Erro Facebook: ", error);
+                    alert('Erro no login com Facebook.');
+                });
+        });
+    </script>
+
+    <!-- NAVEGAÇÃO E LOADING -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => {
@@ -127,12 +176,10 @@
             document.getElementById(tabId).classList.add('active');
         }
 
-        // Fluxo 1: Esconde o Loading e Mostra APENAS a tela de login
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
                 loader.classList.add('fade-out');
-                
                 setTimeout(() => {
                     loader.style.display = 'none';
                     const loginScreen = document.getElementById('login-screen');
@@ -141,22 +188,6 @@
                 }, 500);
             }, 3000);
         });
-
-        // Fluxo 2: Esconde o Login e LIBERA o site principal (Disseca premiações etc)
-        function handleSocialLogin(plataforma) {
-            alert('Conta do ' + plataforma + ' conectada com sucesso!');
-            
-            const loginScreen = document.getElementById('login-screen');
-            loginScreen.classList.add('fade-out');
-            
-            setTimeout(() => {
-                loginScreen.style.display = 'none';
-                // Faz o site de fato aparecer
-                const mainContent = document.getElementById('main-content');
-                mainContent.style.display = 'block';
-                mainContent.classList.add('fade-in');
-            }, 500);
-        }
     </script>
 </body>
 </html>
