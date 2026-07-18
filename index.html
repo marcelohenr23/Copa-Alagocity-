@@ -6,6 +6,8 @@
     <title>Copa Alagocity FF | Torneio de CS</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome para os ícones do Google e Facebook -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -18,85 +20,106 @@
         </div>
     </div>
 
-    <div class="top-bar"></div>
-
-    <header>
-        <div class="logo">COPA <span>ALAGOCITY</span></div>
-        <nav>
-            <a href="#" onclick="switchTab('home')">Início</a>
-            <a href="#" onclick="switchTab('regras')">Regulamento</a>
-            <a href="#" onclick="switchTab('inscricao')">Inscrição</a>
-        </nav>
-    </header>
-
-    <!-- ABA: HOME -->
-    <section id="home" class="tab-content active">
-        <div class="hero-container">
-            <div class="badge">CONTRA SQUAD (4v4)</div>
-            <h1>COPA ALAGOCITY FF</h1>
-            <p>A maior disputa de Contra Squad da região. Prepare sua call, ajuste a sensibilidade e domine a arena de emuladores e móbiles!</p>
-            <div class="premio-card">
-                <p>PREMIAÇÃO DO CAMPEÃO</p>
-                <h2>R$ 200,00</h2>
-            </div>
-            <button class="btn-primary" onclick="switchTab('inscricao')">INSCREVER MEU SQUAD</button>
-        </div>
-    </section>
-
-    <!-- ABA: REGRAS -->
-    <section id="regras" class="tab-content">
-        <div class="content-card">
-            <h2>REGULAMENTO & CRONOGRAMA</h2>
+    <!-- TELA DE LOGIN (APARECE DEPOIS DO LOADING) -->
+    <div id="login-screen" class="hidden">
+        <div class="login-card">
+            <div class="badge">ÁREA DO ATLETA</div>
+            <h2>CONECTE SUA CONTA</h2>
+            <p class="login-subtitle">Para acessar o campeonato e inscrever seu squad, faça login abaixo:</p>
             
-            <div class="rule-item">
-                <h3>📅 Dias de Disputa</h3>
-                <p><strong>Segunda-feira:</strong> Fase de Classificação (Pontos por Vitória).</p>
-                <p><strong>Quarta-feira:</strong> Playoffs (Mata-Mata / Semifinais).</p>
-                <p><strong>Sexta-feira:</strong> A Grande Final (A disputa do título!).</p>
+            <div class="social-login-container">
+                <button type="button" class="btn-social btn-google" onclick="handleSocialLogin('Google')">
+                    <i class="fab fa-google"></i> Entrar com o Google
+                </button>
+                <button type="button" class="btn-social btn-facebook" onclick="handleSocialLogin('Facebook')">
+                    <i class="fab fa-facebook-f"></i> Entrar com o Facebook
+                </button>
             </div>
-
-            <div class="rule-item">
-                <h3>⚔️ Formato Contra Squad</h3>
-                <p>Modo CS (4v4). A classificação inicial define quem avança para os dias eliminatórios.</p>
-            </div>
-
-            <div class="rule-item">
-                <h3>⚙️ Configuração da Sala</h3>
-                <p>Moeda Inicial: 1500 | Munição Limitada: NÃO | Habilidade: SIM.</p>
-            </div>
+            <span class="security-notice"><i class="fas fa-shield-alt"></i> Conexão segura via autenticação oficial.</span>
         </div>
-    </section>
+    </div>
 
-    <!-- ABA: INSCRIÇÃO -->
-    <section id="inscricao" class="tab-content">
-        <div class="content-card">
-            <h2>INSCRIÇÃO DE TIME</h2>
-            <p class="subtitle">Insira o nome da guilda e o nick de cada jogador do quarteto.</p>
-            
-            <form id="form-campeonato">
-                <div class="input-group">
-                    <label>Nome do Squad / Guilda</label>
-                    <input type="text" placeholder="Ex: Alagocity Esports" required>
+    <!-- CONTEÚDO PRINCIPAL DO SITE (SÓ FICA VISÍVEL APÓS LOGIN) -->
+    <div id="main-content" class="blur-content">
+        <div class="top-bar"></div>
+
+        <header>
+            <div class="logo">COPA <span>ALAGOCITY</span></div>
+            <nav>
+                <a href="#" onclick="switchTab('home')">Início</a>
+                <a href="#" onclick="switchTab('regras')">Regulamento</a>
+                <a href="#" onclick="switchTab('inscricao')">Inscrição</a>
+            </nav>
+        </header>
+
+        <!-- ABA: HOME -->
+        <section id="home" class="tab-content active">
+            <div class="hero-container">
+                <div class="badge">CONTRA SQUAD (4v4)</div>
+                <h1>COPA ALAGOCITY FF</h1>
+                <p>A maior disputa de Contra Squad da região. Prepare sua call, ajuste a sensibilidade e domine a arena de emuladores e móbiles!</p>
+                <div class="premio-card">
+                    <p>PREMIAÇÃO DO CAMPEÃO</p>
+                    <h2>R$ 200,00</h2>
                 </div>
-                <div class="input-group">
-                    <label>WhatsApp do Líder (para o grupo do camp)</label>
-                    <input type="tel" placeholder="(75) 99999-9999" required>
-                </div>
+                <button class="btn-primary" onclick="switchTab('inscricao')">INSCREVER MEU SQUAD</button>
+            </div>
+        </section>
+
+        <!-- ABA: REGRAS -->
+        <section id="regras" class="tab-content">
+            <div class="content-card">
+                <h2>REGULAMENTO & CRONOGRAMA</h2>
                 
-                <div class="squad-grid">
-                    <div class="input-group"><label>Nick Jogador 1 (Capitão)</label><input type="text" required></div>
-                    <div class="input-group"><label>Nick Jogador 2</label><input type="text" required></div>
-                    <div class="input-group"><label>Nick Jogador 3</label><input type="text" required></div>
-                    <div class="input-group"><label>Nick Jogador 4</label><input type="text" required></div>
+                <div class="rule-item">
+                    <h3>📅 Dias de Disputa</h3>
+                    <p><strong>Segunda-feira:</strong> Fase de Classificação (Pontos por Vitória).</p>
+                    <p><strong>Quarta-feira:</strong> Playoffs (Mata-Mata / Semifinais).</p>
+                    <p><strong>Sexta-feira:</strong> A Grande Final (A disputa do título!).</p>
                 </div>
 
-                <button type="submit" class="btn-submit">CONFIRMAR INSCRIÇÃO</button>
-            </form>
-        </div>
-    </section>
+                <div class="rule-item">
+                    <h3>⚔️ Formato Contra Squad</h3>
+                    <p>Modo CS (4v4). A classificação inicial define quem avança para os dias eliminatórios.</p>
+                </div>
+
+                <div class="rule-item">
+                    <h3>⚙️ Configuração da Sala</h3>
+                    <p>Moeda Inicial: 1500 | Munição Limitada: NÃO | Habilidade: SIM.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABA: INSCRIÇÃO -->
+        <section id="inscricao" class="tab-content">
+            <div class="content-card">
+                <h2>INSCRIÇÃO DE TIME</h2>
+                <p class="subtitle">Insira o nome da guilda e o nick de cada jogador do quarteto.</p>
+                
+                <form id="form-campeonato">
+                    <div class="input-group">
+                        <label>Nome do Squad / Guilda</label>
+                        <input type="text" placeholder="Ex: Alagocity Esports" required>
+                    </div>
+                    <div class="input-group">
+                        <label>WhatsApp do Líder (para o grupo do camp)</label>
+                        <input type="tel" placeholder="(75) 99999-9999" required>
+                    </div>
+                    
+                    <div class="squad-grid">
+                        <div class="input-group"><label>Nick Jogador 1 (Capitão)</label><input type="text" required></div>
+                        <div class="input-group"><label>Nick Jogador 2</label><input type="text" required></div>
+                        <div class="input-group"><label>Nick Jogador 3</label><input type="text" required></div>
+                        <div class="input-group"><label>Nick Jogador 4</label><input type="text" required></div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">CONFIRMAR INSCRIÇÃO</button>
+                </form>
+            </div>
+        </section>
+    </div>
 
     <script>
-        // Função para mudar de aba
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
@@ -104,16 +127,35 @@
             document.getElementById(tabId).classList.add('active');
         }
 
-        // Script para sumir com o Loading depois de 3 segundos
+        // Lógica de transição: Loading -> Login
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
                 loader.classList.add('fade-out');
+                
                 setTimeout(() => {
                     loader.style.display = 'none';
+                    // Mostra a tela de login com efeito suave
+                    const loginScreen = document.getElementById('login-screen');
+                    loginScreen.classList.remove('hidden');
+                    loginScreen.classList.add('fade-in');
                 }, 500);
             }, 3000);
         });
+
+        // Lógica de transição: Clique no Login -> Libera o Site
+        function handleSocialLogin(plataforma) {
+            alert('Conta do ' + plataforma + ' conectada com sucesso!');
+            
+            const loginScreen = document.getElementById('login-screen');
+            loginScreen.classList.add('fade-out');
+            
+            setTimeout(() => {
+                loginScreen.style.display = 'none';
+                // Remove o desfoque do site principal
+                document.getElementById('main-content').classList.remove('blur-content');
+            }, 500);
+        }
     </script>
 </body>
 </html>
